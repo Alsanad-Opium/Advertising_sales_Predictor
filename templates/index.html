@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ML Prediction</title>
+</head>
+<body>
+
+    <h2>Enter Features</h2>
+
+    <form action="/predict_form" method="post">
+        <label for="f1">TV Ad Budget ($)</label>
+        <input type="text" name="f1" id="f1" placeholder="Feature 1"><br><br>
+        <label for="f2">Radio Ad Budget ($)</label>
+        <input type="text" name="f2" id="f2" placeholder="Feature 2"><br><br>
+        <label for="f3">Newspaper Ad Budget ($)</label>
+        <input type="text" name="f3" id="f3" placeholder="Feature 3"><br><br>
+
+        <button type="submit">Predict</button>
+    </form>
+    {%  if prediction_text: %}
+        <p>{{ prediction_text }}</p>
+    {% endif  %}
+
+</body>
+</html>
