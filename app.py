@@ -24,42 +24,49 @@ def health():
 
 def predict():
     data = request.get_json()
-    data = data.get('features')
+    feature_input = data.get('features')
     
     
     features = ['TV Ad Budget ($)', 'Radio Ad Budget ($)', 'Newspaper Ad Budget ($)']
     
-    df_pred = pd.DataFrame(data,columns=features)
+    df_pred = pd.DataFrame(feature_input,columns=features)
     pred = model.predict(df_pred)
     
     
-    return jsonify({'prediction' : round(float(pred[0]))})
+    return jsonify({'prediction' : round(float(pred[0]), 2)})
     
 
 
 @app.route('/predict_form', methods=['POST'])
 def predict_form():
-    data = {}
-    
-    # Securely parse values one by one
-    for key, val in request.form.items():
-        val = val.strip()
-        if val == '':
-            data[key] = np.nan
-        else:
-            try:
-                # Only accept valid numbers
-                data[key] = float(val)
-            except ValueError:
-                # If someone typed text/letters, treat it as missing data safely
-                data[key] = np.nan 
-    
-    df_feat = pd.DataFrame([data])
-    pred = model.predict(df_feat)
-    value = pred.item()
-    
-    return render_template('index.html', prediction_text=f'Predicted Sales: {round(value)}')
+    try:
+        tv = request.form.get('tv')
+        radio = request.form.get('radio')
+        newspaper = request.form.get('newspaper')
 
+        
+        features = {
+            'TV Ad Budget ($)': float(tv) if tv else np.nan,
+            'Radio Ad Budget ($)': float(radio) if radio else np.nan,
+            'Newspaper Ad Budget ($)': float(newspaper) if newspaper else np.nan
+        }
+
+        df_feat = pd.DataFrame([features])
+
+        pred = model.predict(df_feat)
+        value = pred.item()
+
+        return render_template(
+            'index.html',
+            prediction_text=f'Predicted Sales: {value:.2f}'
+        )
+
+    except Exception as e:
+        return render_template(
+            'index.html',
+            prediction_text=f'Error: {str(e)}'
+        )
+    
     
 if __name__ == '__main__':
     app.run(debug = True)
