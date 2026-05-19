@@ -9,15 +9,15 @@
 
     <form action="/predict_form" method="post">
         <label for="f1">TV Ad Budget ($)</label>
-        <input type="text" name="TV Ad Budget ($)" id="f1" placeholder="Feature 1"><br><br>
+        <input type="number" name="tv" id="f1" placeholder="Feature 1"><br><br>
         <label for="f2">Radio Ad Budget ($)</label>
-        <input type="text" name="Radio Ad Budget ($)" id="f2" placeholder="Feature 2"><br><br>
+        <input type="number" name="radio" id="f2" placeholder="Feature 2"><br><br>
         <label for="f3">Newspaper Ad Budget ($)</label>
-        <input type="text" name="Newspaper Ad Budget ($)" id="f3" placeholder="Feature 3"><br><br>
+        <input type="number" name="newspaper" id="f3" placeholder="Feature 3"><br><br>
 
         <button type="submit">Predict</button>
     </form>
-    {%  if prediction_text: %}
+    {%  if prediction_text %}
         <p>{{ prediction_text }}</p>
     {% endif  %}
 
