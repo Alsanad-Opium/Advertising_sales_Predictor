@@ -3,7 +3,12 @@ from flask import Flask,request,jsonify,render_template
 import numpy as np 
 import pandas as pd
 
-model = pickle.load(open('model/Advertising_model_sales_v1.pkl','rb'))
+import os
+
+BASE_DIR = os.path.dirname(__file__)
+model_path = os.path.join(BASE_DIR, "model", "Advertising_model_sales_v1.pkl")
+
+model = pickle.load(open(model_path, "rb"))
 
 EXPECTED_FEATURES = 3
 app = Flask(__name__)
@@ -111,4 +116,4 @@ def predict_form():
     
     
 if __name__ == '__main__':
-    app.run(debug = True)
+    app.run()
