@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Ad Sales Predictor</title>
+    <title>Ad Spend Optimizer</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
@@ -10,7 +10,7 @@
 <div class="container">
     
     <div class="card">
-        <h1>Ad Sales Predictor</h1>
+        <h1>Sales Forecast Tool for Marketing Budgets</h1>
         <p class="subtitle">Estimate sales based on advertising budgets</p>
 
         <form action="/predict_form" method="post" class="form">
@@ -33,11 +33,18 @@
             <button type="submit">Predict Sales</button>
         </form>
 
-        {% if prediction_text %}
-            <div class="result">
-                {{ prediction_text }}
-            </div>
-        {% endif %}
+       {% if prediction_text %}
+    <div class="result">
+        <h3>Predicted Sales</h3>
+        <p class="value">{{ prediction_text }}</p>
+
+        <h4>ROI</h4>
+        <p>{{ roi_text }}</p>
+
+        <h4>Insight</h4>
+        <p class="insight">{{ insight_text }}</p>
+    </div>
+{% endif %}
 
     </div>
 
