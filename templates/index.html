@@ -1,25 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>ML Prediction</title>
+    <meta charset="UTF-8">
+    <title>Ad Sales Predictor</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 
-    <h2>Enter Features</h2>
+<div class="container">
+    
+    <div class="card">
+        <h1>Ad Sales Predictor</h1>
+        <p class="subtitle">Estimate sales based on advertising budgets</p>
 
-    <form action="/predict_form" method="post">
-        <label for="f1">TV Ad Budget ($)</label>
-        <input type="number" name="tv" id="f1" placeholder="Feature 1"><br><br>
-        <label for="f2">Radio Ad Budget ($)</label>
-        <input type="number" name="radio" id="f2" placeholder="Feature 2"><br><br>
-        <label for="f3">Newspaper Ad Budget ($)</label>
-        <input type="number" name="newspaper" id="f3" placeholder="Feature 3"><br><br>
+        <form action="/predict_form" method="post" class="form">
 
-        <button type="submit">Predict</button>
-    </form>
-    {%  if prediction_text %}
-        <p>{{ prediction_text }}</p>
-    {% endif  %}
+            <div class="input-group">
+                <label>TV Budget ($)</label>
+                <input type="number" step="any" name="tv">
+            </div>
+
+            <div class="input-group">
+                <label>Radio Budget ($)</label>
+                <input type="number" step="any" name="radio" >
+            </div>
+
+            <div class="input-group">
+                <label>Newspaper Budget ($)</label>
+                <input type="number" step="any" name="newspaper" >
+            </div>
+
+            <button type="submit">Predict Sales</button>
+        </form>
+
+        {% if prediction_text %}
+            <div class="result">
+                {{ prediction_text }}
+            </div>
+        {% endif %}
+
+    </div>
+
+</div>
 
 </body>
 </html>
