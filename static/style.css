@@ -102,3 +102,38 @@ button:hover {
     text-align: center;
     border: 1px solid #a7f3d0;
 }
+
+/* .result {
+    margin-top: 20px;
+    padding: 16px;
+    border-radius: 10px;
+    background: #ecfdf5;
+    border: 1px solid #a7f3d0;
+} */
+
+.result h3 {
+    font-size: 16px;
+    color: #065f46;
+}
+
+.result .value {
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.result h4 {
+    font-size: 13px;
+    margin-top: 10px;
+    color: #374151;
+}
+
+.result p {
+    font-size: 14px;
+    color: #065f46;
+}
+
+.result .insight {
+    margin-top: 6px;
+    font-style: italic;
+}
