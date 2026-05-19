@@ -55,16 +55,34 @@ def predict_form():
 
         pred = model.predict(df_feat)
         value = pred.item()
+        sales = pred.item()
+        
+        
+        #  ROI Calculation
+        total_budget = float(tv) + float(radio) + float(newspaper)
+        roi = sales / total_budget if total_budget > 0 else 0
+        
+        # Insight Logic
+        if roi > 0.15:
+            insight = "High return. Scaling budget may increase revenue."
+        elif roi > 0.08:
+            insight = "Moderate return. Consider optimizing channel allocation."
+        else:
+            insight = "Low return. Re-evaluate marketing spend."
 
         return render_template(
             'index.html',
-            prediction_text=f'Predicted Sales: {value:.2f}'
+            prediction_text=f"${sales:.2f}",
+            roi_text=f"{roi:.2f}",
+            insight_text=insight
         )
 
     except Exception as e:
         return render_template(
             'index.html',
-            prediction_text=f'Error: {str(e)}'
+            prediction_text="Error",
+            roi_text="",
+            insight_text=str(e)
         )
     
     
