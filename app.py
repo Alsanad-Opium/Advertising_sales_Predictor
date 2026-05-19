@@ -69,14 +69,38 @@ def predict_form():
             insight = "Moderate return. Consider optimizing channel allocation."
         else:
             insight = "Low return. Re-evaluate marketing spend."
+            
+          
+        # 🔥 Budget analysis
+        budgets = {
+            "TV": float(tv),
+            "Radio": float(radio),
+            "Newspaper": float(newspaper)
+        }
+
+        # Find highest and lowest spend channels
+        max_channel = max(budgets, key=budgets.get)
+        min_channel = min(budgets, key=budgets.get)
+
+        # 🔥 Recommendation logic
+        if roi > 0.15:
+            recommendation = f"{max_channel} is performing well. Increasing budget here may scale returns."
+
+        elif roi > 0.08:
+            recommendation = f"{min_channel} is underutilized. Consider reallocating budget from {max_channel} to {min_channel}."
+
+        else:
+            recommendation = "Overall ROI is low. Re-evaluate strategy or reduce spend."
+
 
         return render_template(
-            'index.html',
-            prediction_text=f"${sales:.2f}",
-            roi_text=f"{roi:.2f}",
-            insight_text=insight
-        )
-
+        'index.html',
+        prediction_text=f"${sales:.2f}",
+        roi_text=f"{roi:.2f}",
+        insight_text=insight,
+        recommendation_text=recommendation
+    )
+      
     except Exception as e:
         return render_template(
             'index.html',
